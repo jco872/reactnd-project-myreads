@@ -7,14 +7,23 @@ export default function BookList(props) {
     if (props.books !== undefined) {
         books = props.books.map(book => {
             let authors = null;
+            let backgroundImage = null;
+
+            if (book.imageLinks) {
+                backgroundImage = book.imageLinks.thumbnail;
+            }
+
             if (book.authors !== undefined) {
                 authors = book.authors.map(author => <div className="book-authors">{author}</div> );
             }
+
+
+
             return (
                 <li key={book.id}>
                     <div className="book">
                         <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${backgroundImage})` }}></div>
                         <div className="book-shelf-changer">
                             <SelectBox shelf={book.shelf} book={book} moveBook={props.moveBook} />
                         </div>

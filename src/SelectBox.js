@@ -30,7 +30,7 @@ export default class SelectBox extends React.Component {
         return (
             <select value={this.props.shelf} onChange={this.moveBook}>
                 {options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
+                    <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
             </select>
         )
