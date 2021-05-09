@@ -71,7 +71,6 @@ class BooksApp extends React.Component {
 
   closeSearch() {
     this.setState({ 
-      showSearchPage: false,
       searchResults: null 
     });
   }  
