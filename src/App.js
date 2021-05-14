@@ -44,8 +44,11 @@ class BooksApp extends React.Component {
 
     if (query) {
       BooksAPI.search(query).then(res => {
+        let searchResults = null;
 
         if (res.length > 0) {
+          console.log("res: ", res);
+
           const allBooks = [...this.state.bookshelf.currentlyReading, 
             ...this.state.bookshelf.wantToRead,
             ...this.state.bookshelf.read];
@@ -53,14 +56,19 @@ class BooksApp extends React.Component {
           for(const newBook of res) {        
             let matchedBook = allBooks.find(book => book.id === newBook.id);
 
-            if (matchedBook)
+            if (matchedBook) {
               newBook.shelf = matchedBook.shelf;
+            } else {
+              newBook.shelf = "none";
+            }
           }
 
-          this.setState({
-            searchResults: res 
-          })
+          searchResults = res;
         }
+
+        this.setState({
+          searchResults
+        })
       })
     } else {
       this.setState({
